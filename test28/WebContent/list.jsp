@@ -56,7 +56,7 @@
 		<%}
 	}
 %>
-<tr>
+<tr> 
 <td><input type="button" value="글작성" onclick="location.href='post.jsp'"></td>
 </tr>
 </table>
