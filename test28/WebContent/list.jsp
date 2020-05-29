@@ -17,9 +17,10 @@
 		numPage="1";
 	}
 	int nowPage = Integer.parseInt(numPage);
-	int pageRecords = 5;
-	int totalPage = 0;
-	totalPage = dao.CountRecords();
+	int pageRecords = 1
+			;
+	int totalRecords = 0;
+	totalRecords = dao.CountRecords();
 	int startRow = (nowPage-1)*pageRecords+1;
 	int endRow = pageRecords;
 	
@@ -60,6 +61,36 @@
 <td><input type="button" value="글작성" onclick="location.href='post.jsp'"></td>
 </tr>
 </table>
+</div>
+<div align="center">
+<p>
+<%
+	if(totalRecords>0){
+		int block = 10;
+		int totalPage = totalRecords/pageRecords+((totalRecords%pageRecords==0)? 0:1);
+		int startPage = ((nowPage-1)/10)*10+1;
+		int endPage = startPage+block-1;
+		
+		if(endPage>totalPage) endPage = totalPage;
+		
+		if(startPage>10){
+			%>
+			<a href="list.jsp?numPage=<%=startPage-10%>">[이전]</a>
+			<% 
+		}
+		for(int i=startPage;i<=endPage;i++){
+			%>
+			<a href="list.jsp?numPage=<%=i%>">[<%=i%>]</a>
+			
+		<%}
+		if(endPage<totalPage){
+			%>
+			<a href="list.jsp?numPage=<%=startPage+10%>">[다음]</a>
+			<%
+		}
+	}
+%>
+</p>
 </div>
 </body>
 </html>
